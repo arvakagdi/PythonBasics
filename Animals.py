@@ -4,7 +4,7 @@ class Animal(object):
     def __init__(self,age):
         self.age = age
         self.name = None
-    '''Getters'''
+    '''Getters'''       
     def getAge(self):
         return self.age
     def getName(self):
@@ -30,6 +30,32 @@ class Cat(Animal):
     
     
 class Rabbit(Animal):
+    tag = 1
+    
+    def __init__ (self, age, ParentM = None, ParentD = None):
+        Animal.__init__(self,age)
+        self.ParentM = ParentM
+        self.ParentD = ParentD
+        self.rID = Rabbit.tag
+        Rabbit.tag += 1
+        
+    def get_rID(self):
+        return str(self.rID).zfill(3)
+    
+    def getParentM (self):
+        return self.ParentM
+    def getParentD (self):
+        return self.ParentD
+    
+    def __add__ (self,other):
+        #returning obj of same type as the class
+        return(Rabbit(0,self,other))
+    def __eq__(self,other):
+        #comparing if parents are same
+        parent_same = self.ParentD == other.ParentD and self.ParentM == other.ParentM
+        parent_opp =  self.ParentD == other.ParentM and self.ParentM == other.ParentD    
+        return parent_same or parent_opp
+    
     def speaks(self):
         print("meepp...")
     def __str__(self):
